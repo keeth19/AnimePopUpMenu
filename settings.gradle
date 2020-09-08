@@ -1,0 +1,3 @@
+include ':anime-popup-menu'
+include ':app'
+rootProject.name = "AnimePopUpMenu"

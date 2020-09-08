@@ -1,0 +1,40 @@
+package com.idesk.animepopupmenu;
+
+import android.os.Bundle;
+import android.widget.CompoundButton;
+import android.widget.Switch;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.idesk.anime_popup_menu.ButtonEnum;
+import com.idesk.anime_popup_menu.Piece.PiecePlaceEnum;
+import com.idesk.anime_popup_menu.PopUpButtons.ButtonPlaceEnum;
+import com.idesk.anime_popup_menu.PoupupMenuButton;
+
+public class DraggableActivity extends AppCompatActivity {
+
+    private PoupupMenuButton bmb;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_draggable);
+
+        bmb = findViewById(R.id.bmb);
+        assert bmb != null;
+        bmb.setButtonEnum(ButtonEnum.SimpleCircle);
+        bmb.setPiecePlaceEnum(PiecePlaceEnum.DOT_9_1);
+        bmb.setButtonPlaceEnum(ButtonPlaceEnum.SC_9_1);
+        for (int i = 0; i < bmb.getPiecePlaceEnum().pieceNumber(); i++)
+            bmb.addBuilder(BuilderManager.getSimpleCircleButtonBuilder());
+
+        Switch draggableSwitch = findViewById(R.id.draggable_switch);
+        draggableSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                bmb.setDraggable(isChecked);
+            }
+        });
+        draggableSwitch.setChecked(true);
+    }
+}
